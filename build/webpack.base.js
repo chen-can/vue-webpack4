@@ -13,8 +13,8 @@ module.exports = {
   entry: './src/main.js',
   // 打包的出口
   output: {
-    filename: 'app.js',
-    path: resolve('../dist')
+    filename: 'js/app.js',
+    path: resolve('../dist/assets')
   },
   // 打包规则
   module: {
