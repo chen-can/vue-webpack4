@@ -1,10 +1,6 @@
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.js')
-const path = require('path')
-const glob = require('glob')
-const PATHS = {
-  src: path.join(__dirname, 'src')
-}
+
 // 导入css抽离插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 导入css压缩插件
@@ -13,8 +9,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 // 导入Gzip插件
 const CompressionPlugin = require("compression-webpack-plugin");
-// 导入擦除无用到的css插件
-const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
 
@@ -79,10 +73,6 @@ const prodConfig = {
       test: productionGzipExtensions,
       threshold: 10240,
       minRatio: 0.8
-    }),
-    // 擦除无用到的css
-    new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
   ],
 }
