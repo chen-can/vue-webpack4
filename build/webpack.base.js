@@ -13,8 +13,8 @@ module.exports = {
   entry: './src/main.js',
   // 打包的出口
   output: {
-    filename: 'js/app.js',
-    path: resolve('../dist/assets')
+    filename: 'assets/js/app.js',
+    path: resolve('../dist')
   },
   // 打包规则
   module: {
@@ -26,19 +26,45 @@ module.exports = {
       },
       {
         test: /\.(gif|jpe?g|png|svg)\??.*$/,
-        loader: 'url-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath:'/assets/img',
-          limit: 2048 //2k
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: '/assets/img',
+              limit: 2048 //2k
+            }
+          },
+          {
+            loader: 'image-webpack-loader', //图片压缩
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 2048,
-          outputPath:'/assets/music',
+          outputPath: '/assets/music',
         }
       },
       {
@@ -46,12 +72,12 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 2048,
-          outputPath:'/assets/font',
+          outputPath: '/assets/font',
         }
       },
       {
         test: /\.js$/,
-        exclude:/node_modules/,
+        exclude: /node_modules/,
         use: [
           'babel-loader',
           {
