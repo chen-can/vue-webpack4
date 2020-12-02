@@ -29,7 +29,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           name: '[name].[ext]',
-          outputPath:'/assets/img',
+          publicPath:'/assets/img',
           limit: 2048 //2k
         }
       },
@@ -38,7 +38,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 2048,
-          outputPath:'/assets/music',
+          publicPath:'/assets/music',
         }
       },
       {
@@ -46,7 +46,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 2048,
-          outputPath:'/assets/font',
+          publicPath:'/assets/font',
         }
       },
       {
